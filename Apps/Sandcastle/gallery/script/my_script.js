@@ -11,6 +11,7 @@ var TOTAL_RAIN_DROP = 3000;
 function startup(Cesium) {
     console.log("startUp");
     // Cesium.BingMapsApi.defaultKey = "zzWjk21MKE6PA3dnArsG~mXUlKXIqFe8nByQlxoCiPw~AkVQrb4F729BlIgUx5FmvX4VSpoomW7YLR5MU2pPwIVoGbXpcREF8OXD12gAcZNC";
+    Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1MDc0NTFhOC0zZjMxLTQ5NzctYjJmMy0yNzM0YTRhNDg3MmUiLCJpZCI6NzU4LCJpYXQiOjE2MDIxMzI1Mzd9.cLlRg9IJeBwtZUcG5qnBGKH0wM9cax6ArZrTvcNMMjk"
     // cesium viewer define
     var viewer = new Cesium.Viewer('cesiumContainer', {
         scene3DOnly: true,
@@ -25,10 +26,10 @@ function startup(Cesium) {
 
 
     // set canvas attribute
-    canvas.setAttribute('tabindex', '0'); // needed to put focus on the canvas
-    canvas.onclick = function () {
-        canvas.focus();
-    };
+    // canvas.setAttribute('tabindex', '0'); // needed to put focus on the canvas
+    // canvas.onclick = function () {
+    //     canvas.focus();
+    // };
 
     var entities = viewer.entities;
     entities.add({
@@ -114,7 +115,6 @@ function startup(Cesium) {
         //     interpolationAlgorithm: Cesium.LinearApproximation
         // });
         rainDropEntityList.push(entity);
-
     }
 
     function spamCloudRandomly(count) {
@@ -417,9 +417,9 @@ function startup(Cesium) {
                 console.log("Stormy: ", isStormy(weather));
             })
         } else {
-            rainStatus = true;
-            cloudyStatus = true;
-            viewer.shadows = true;
+            rainStatus = false;
+            cloudyStatus = false;
+            viewer.shadows = false;
         }
     });
 
@@ -533,4 +533,3 @@ function startup(Cesium) {
     viewer.scene.globe.enableLighting = true;
     Sandcastle.finishedLoading();
 }
-
