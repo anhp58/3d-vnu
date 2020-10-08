@@ -531,5 +531,6 @@ function startup(Cesium) {
         return weather.toLowerCase().indexOf("storm") >= 0;
     }
     viewer.scene.globe.enableLighting = true;
+
     Sandcastle.finishedLoading();
 }
