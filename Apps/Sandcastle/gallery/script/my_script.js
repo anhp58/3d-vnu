@@ -530,6 +530,39 @@ function startup(Cesium) {
     function isStormy(weather) {
         return weather.toLowerCase().indexOf("storm") >= 0;
     }
+
+    var aqiWeatherDisplay = document.createElement("div");
+
+    function getAQI (callback) {
+        var apiLink = "http://api.airvisual.com/v2/nearest_city?key=25e95e2b-579d-48c2-b339-5096e24efcb2"
+        $.get(apiLink, function (data) {
+            // aqius = data.current.pollution.aqius;
+            aqius = data.data.current.pollution;
+            weather = data.data.current.weather
+            callback(aqius, weather);
+        });
+    }
+
+    
+    getAQI (function (aqius, weather) {
+        console.log("aqius", aqius);
+        console.log("weather", weather);
+        var msg = "<h3> Air Quality Index </h3></br>";
+        msg += "AQI - US: " + aqius.aqius + "</br>";
+        msg += "AQI - CN: " + aqius.aqicn + "</br>";
+        msg += "<h3> Weather Index </h3></br>";
+        msg += "Humidity: " + weather.hu + "</br>";
+        msg += "Pressure: " + weather.pr + "</br>";
+        msg += "Temperature: " + weather.tp + "</br>";
+        msg += "Wind Speed: " + weather.ws + "</br>";
+
+        aqiWeatherDisplay.innerHTML = msg;
+        console.log("oke")
+    });
+    aqiWeatherDisplay.style.background = "rgba(42, 42, 42, 0.7)";
+    aqiWeatherDisplay.style.padding = "5px 5px";
+    document.getElementById("toolbar").appendChild(aqiWeatherDisplay);
+
     viewer.scene.globe.enableLighting = true;
     Sandcastle.finishedLoading();
 }
