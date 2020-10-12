@@ -547,10 +547,10 @@ function startup(Cesium) {
     getAQI (function (aqius, weather) {
         console.log("aqius", aqius);
         console.log("weather", weather);
-        var msg = "<h3> Air Quality Index </h3></br>";
+        var msg = "<h4> Air Quality Index </h4>";
         msg += "AQI - US: " + aqius.aqius + "</br>";
         msg += "AQI - CN: " + aqius.aqicn + "</br>";
-        msg += "<h3> Weather Index </h3></br>";
+        msg += "<h4> Weather Index </h4>";
         msg += "Humidity: " + weather.hu + "</br>";
         msg += "Pressure: " + weather.pr + "</br>";
         msg += "Temperature: " + weather.tp + "</br>";
