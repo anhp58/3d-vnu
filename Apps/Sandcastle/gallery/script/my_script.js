@@ -24,13 +24,11 @@ function startup(Cesium) {
     var canvas = viewer.canvas;
     var camera = viewer.camera;
 
-
     // set canvas attribute
     // canvas.setAttribute('tabindex', '0'); // needed to put focus on the canvas
     // canvas.onclick = function () {
     //     canvas.focus();
     // };
-
     var entities = viewer.entities;
     entities.add({
         position : Cesium.Cartesian3.fromDegrees(105.782284, 21.039170),
@@ -165,7 +163,6 @@ function startup(Cesium) {
     var lastTimeSpaming = -1;
     var debug = true;
 
-    var substring = "rain";
     viewer.clock.onTick.addEventListener(function () {
         if (lastTimeAnimation == -1 || lastTimeSpaming == -1) {
             lastTimeAnimation = Date.now();
@@ -230,7 +227,6 @@ function startup(Cesium) {
             lastTimeSpaming = Date.now();
         }
     });
-    // add building polygon json data source:
 
     Sandcastle.addToolbarButton('VNU Campus', function () {
         // promise allow to preload datasource before use
@@ -260,10 +256,6 @@ function startup(Cesium) {
             mousePosition = startMousePosition = Cesium.Cartesian3.clone(movement.position);
         }, Cesium.ScreenSpaceEventType.LEFT_DOWN);
         
-        // mouse moved:
-        // handler.setInputAction(function(movement) {
-        //  mousePosition = movement.endPosition;
-        // }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
         
         // keyboard released:
         handler.setInputAction(function(position) {
@@ -401,8 +393,8 @@ function startup(Cesium) {
             getWeatherInfo(function(weather){
                 console.log(weather);
                 //cloudyStatus = true;
-                viewer.shadows = true;
-                // rainStatus = true;
+                // viewer.shadows = true;
+                rainStatus = true;
                 // cloudyStatus = true;
                 if (isRain(weather)) rainStatus = true;
                 else if (isCloudy(weather)) cloudyStatus = true;
@@ -417,7 +409,7 @@ function startup(Cesium) {
                 console.log("Stormy: ", isStormy(weather));
             })
         } else {
-            rainStatus = false;
+            rainStatus = true;
             cloudyStatus = false;
             viewer.shadows = false;
         }
@@ -545,8 +537,6 @@ function startup(Cesium) {
 
     
     getAQI (function (aqius, weather) {
-        console.log("aqius", aqius);
-        console.log("weather", weather);
         var msg = "<h4> Air Quality Index </h4>";
         msg += "AQI - US: " + aqius.aqius + "</br>";
         msg += "AQI - CN: " + aqius.aqicn + "</br>";
@@ -557,7 +547,6 @@ function startup(Cesium) {
         msg += "Wind Speed: " + weather.ws + "</br>";
 
         aqiWeatherDisplay.innerHTML = msg;
-        console.log("oke")
     });
     aqiWeatherDisplay.style.background = "rgba(42, 42, 42, 0.7)";
     aqiWeatherDisplay.style.padding = "5px 5px";
