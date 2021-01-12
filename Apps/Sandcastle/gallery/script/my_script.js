@@ -409,7 +409,7 @@ function startup(Cesium) {
                 console.log("Stormy: ", isStormy(weather));
             })
         } else {
-            rainStatus = true;
+            rainStatus = false;
             cloudyStatus = false;
             viewer.shadows = false;
         }
